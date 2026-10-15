@@ -10,12 +10,16 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
 import ru.stas.itemsshop.ItemsShop;
+
+import java.util.List;
 
 public final class ClientEvents {
     public static final KeyMapping OPEN_SHOP = new KeyMapping(
@@ -56,6 +60,26 @@ public final class ClientEvents {
             if (event.getItemStack().is(Items.SPAWNER)) {
                 event.getToolTip().add(Component.translatable("tooltip.items_shop.empty_spawner")
                         .withStyle(ChatFormatting.GRAY));
+            }
+        }
+
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public static void afterScreenInit(ScreenEvent.Init.Post event) {
+            if (!(event.getScreen() instanceof ShopScreen)) return;
+
+            clearInventoryProfilesWidgets("org.anti_ad.mc.ipnext.gui.inject.ContainerScreenEventHandler",
+                    "setCurrentWidgets");
+            clearInventoryProfilesWidgets("org.anti_ad.mc.ipnext.gui.inject.InsertWidgetHandler",
+                    "insertWidget");
+        }
+
+        private static void clearInventoryProfilesWidgets(String className, String methodName) {
+            try {
+                Class<?> handlerClass = Class.forName(className, false, ClientEvents.class.getClassLoader());
+                Object handler = handlerClass.getField("INSTANCE").get(null);
+                handlerClass.getMethod(methodName, List.class).invoke(handler, (Object) null);
+            } catch (ReflectiveOperationException | LinkageError ignored) {
+                // Inventory Profiles Next is optional and may not be installed.
             }
         }
     }
