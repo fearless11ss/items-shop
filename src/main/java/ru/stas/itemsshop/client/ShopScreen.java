@@ -18,6 +18,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.anti_ad.mc.ipn.api.IPNIgnore;
 import org.lwjgl.glfw.GLFW;
 import ru.stas.itemsshop.economy.PriceManager;
 import ru.stas.itemsshop.economy.PriceCatalog;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+@IPNIgnore
 public final class ShopScreen extends AbstractContainerScreen<ShopMenu> {
     private static final int COLUMNS = 9;
     private static final int ROWS = 5;

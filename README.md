@@ -48,7 +48,7 @@ JDK 17-21 is required.
 ./gradlew.bat --gradle-user-home C:\GradleItemsShop build
 ```
 
-The compiled mod is written to `build/libs/items_shop-1.6.7.jar`.
+The compiled mod is written to `build/libs/items_shop-1.6.8.jar`.
 
 ## Reporting bugs
 
