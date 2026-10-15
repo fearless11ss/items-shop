@@ -234,7 +234,9 @@ public final class ShopScreen extends AbstractContainerScreen<ShopMenu> {
         graphics.fill(x, y, x + imageWidth, y + imageHeight, 0xEE111722);
         graphics.fill(x + 3, y + 3, x + imageWidth - 3, y + imageHeight - 3, 0xFF202938);
         graphics.fill(x + 7, y + 25, x + imageWidth - 7, y + 142, 0xFF111722);
-        graphics.fill(x + 95, y + 174, x + 265, y + 231, 0xFF111722);
+        // One pixel of padding on every side keeps the main inventory frame
+        // visually even instead of making its left and right edges thicker.
+        graphics.fill(x + 98, y + 174, x + 262, y + 230, 0xFF111722);
 
         drawPlayerSlotFrames(graphics, x, y);
         if (menu.tab() == ShopMenu.TAB_BUY) drawPurchasePanel(graphics, x, y);

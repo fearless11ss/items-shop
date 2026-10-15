@@ -35,7 +35,7 @@ public final class PriceManager {
     private static final Map<RecipeManager, PriceCatalog> CATALOGS = Collections.synchronizedMap(new WeakHashMap<>());
     private static final Set<String> UNTRADABLE_ITEMS = Set.of(
             "barrier", "chain_command_block", "command_block", "command_block_minecart",
-            "debug_stick", "jigsaw", "knowledge_book", "light",
+            "debug_stick", "dragon_egg", "jigsaw", "knowledge_book", "light",
             "repeating_command_block", "structure_block", "structure_void"
     );
     private static final Set<String> TECHNICAL_ITEMS = Set.of(

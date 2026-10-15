@@ -37,6 +37,7 @@ No additional mods are required. For single-player, install the mod in the local
 
 - A purchased spawner is empty. Place it and apply a spawn egg to select a mob.
 - Administrative items such as command blocks, barriers, structure blocks, light blocks, the debug stick, and knowledge books are not sold.
+- The dragon egg cannot be bought or sold because vanilla portal duplication would allow unlimited copies to generate money.
 - Selling an item removes the entire offered stack together with its custom name, enchantments, stored contents, and other NBT data. Empty containers before selling them if you want to keep their contents.
 
 ## Building from source
@@ -47,7 +48,7 @@ JDK 17-21 is required.
 ./gradlew.bat --gradle-user-home C:\GradleItemsShop build
 ```
 
-The compiled mod is written to `build/libs/items_shop-1.6.6.jar`.
+The compiled mod is written to `build/libs/items_shop-1.6.7.jar`.
 
 ## Reporting bugs
 
