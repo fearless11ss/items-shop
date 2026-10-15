@@ -118,6 +118,9 @@ repositories {
     // Inventory Profiles Next publishes its optional integration API here.
     maven { url = 'https://maven.ipn-mod.org/releases' }
 
+    // Just Enough Items publishes its optional integration API here.
+    maven { url = 'https://maven.blamejared.com' }
+
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
     // flatDir {
@@ -138,6 +141,8 @@ dependencies {
     compileOnly('org.anti_ad.mc:IPN-forge-1.20:1.10.9') {
         transitive = false
     }
+
+    compileOnly fg.deobf('mezz.jei:jei-1.20.1-common-api:15.20.0.112')
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
