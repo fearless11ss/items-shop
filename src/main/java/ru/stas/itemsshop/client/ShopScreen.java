@@ -164,7 +164,6 @@ public final class ShopScreen extends AbstractContainerScreen<ShopMenu> {
     }
 
     private void select(ItemStack item) {
-        if (menu.purchasePaid() && menu.getSlot(ShopMenu.PURCHASE_SLOT).hasItem()) return;
         selected = item.copy();
         quantity = Math.min(quantity, PriceManager.maxPurchaseQuantity(item));
         ShopNetwork.selectPurchase(menu.containerId, selected, quantity);
@@ -207,11 +206,10 @@ public final class ShopScreen extends AbstractContainerScreen<ShopMenu> {
         quantityButton.setMessage(Component.translatable("screen.items_shop.quantity", quantity));
         ItemStack preview = menu.getSlot(ShopMenu.PURCHASE_SLOT).getItem();
         int count = preview.isEmpty() ? 0 : preview.getCount();
-        quantityButton.active = !selected.isEmpty() && !menu.purchasePaid();
-        buyButton.active = !preview.isEmpty() && !menu.purchasePaid();
-        buyButton.setMessage(menu.purchasePaid()
-                ? Component.translatable("screen.items_shop.take_item")
-                : Component.translatable("screen.items_shop.pay", preview.isEmpty() ? 0L : (long) prices.buyPrice(preview) * count));
+        quantityButton.active = !selected.isEmpty();
+        buyButton.active = !preview.isEmpty();
+        buyButton.setMessage(Component.translatable("screen.items_shop.pay",
+                preview.isEmpty() ? 0L : (long) prices.buyPrice(preview) * count));
 
         ItemStack offered = menu.getSlot(ShopMenu.SALE_SLOT).getItem();
         sellButton.active = !offered.isEmpty();
@@ -261,10 +259,12 @@ public final class ShopScreen extends AbstractContainerScreen<ShopMenu> {
                 graphics.renderItem(item, cellX + 1, cellY + 1);
             }
         }
-        drawSlotFrame(graphics, x + 279, y + 34, menu.purchasePaid() ? 0xFF57B56A : 0xFFE3B341);
-        graphics.drawCenteredString(font, Component.translatable(menu.purchasePaid()
-                        ? "screen.items_shop.paid_slot" : "screen.items_shop.purchase_slot"),
-                x + 288, y + 56, menu.purchasePaid() ? 0x71E987 : 0xFFD966);
+        ItemStack preview = menu.getSlot(ShopMenu.PURCHASE_SLOT).getItem();
+        drawSlotFrame(graphics, x + 279, y + 34, 0xFFE3B341);
+        if (preview.isEmpty()) {
+            graphics.drawCenteredString(font, Component.translatable("screen.items_shop.purchase_slot"),
+                    x + 288, y + 56, 0xFFD966);
+        }
     }
 
     private void drawSalePanel(GuiGraphics graphics, int x, int y) {

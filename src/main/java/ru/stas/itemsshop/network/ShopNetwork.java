@@ -12,7 +12,7 @@ import ru.stas.itemsshop.ItemsShop;
 import ru.stas.itemsshop.economy.PriceManager;
 
 public final class ShopNetwork {
-    private static final String VERSION = "2";
+    private static final String VERSION = "4";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(ItemsShop.MOD_ID, "main"),
             () -> VERSION,
@@ -66,9 +66,10 @@ public final class ShopNetwork {
 
     public static void selectPurchase(int containerId, ItemStack item, int quantity) {
         PriceManager.BookEnchantment book = PriceManager.singleBookEnchantment(item);
+        ResourceLocation potionId = PriceManager.potionId(item);
         CHANNEL.sendToServer(new SelectPurchasePacket(containerId,
                 BuiltInRegistries.ITEM.getKey(item.getItem()),
-                book == null ? null : book.id(), book == null ? 0 : book.level(), quantity));
+                book == null ? null : book.id(), book == null ? 0 : book.level(), potionId, quantity));
     }
 
     public static void menuAction(int containerId, boolean buy) {

@@ -13,6 +13,8 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -305,8 +307,78 @@ public final class PriceManager {
         return new BookEnchantment(id, entry.getKey(), level);
     }
 
+    public static boolean isPotionItem(Item item) {
+        return item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION;
+    }
+
+    /** Returns the registry id of an effect potion, excluding base/no-effect potions. */
+    public static ResourceLocation potionId(ItemStack stack) {
+        if (stack.isEmpty() || !isPotionItem(stack.getItem())) return null;
+        Potion potion = PotionUtils.getPotion(stack);
+        if (!isEffectPotion(potion)) return null;
+        return BuiltInRegistries.POTION.getKey(potion);
+    }
+
+    /** Creates a potion stack while validating that it has a real effect. */
+    public static ItemStack potionStack(Item item, ResourceLocation potionId) {
+        if (!isPotionItem(item) || potionId == null || !"minecraft".equals(potionId.getNamespace())) {
+            return ItemStack.EMPTY;
+        }
+        Potion potion = BuiltInRegistries.POTION.getOptional(potionId).orElse(null);
+        if (!isEffectPotion(potion)) return ItemStack.EMPTY;
+        ItemStack stack = item.getDefaultInstance();
+        PotionUtils.setPotion(stack, potion);
+        return stack;
+    }
+
+    public static int potionBuyPrice(ItemStack stack) {
+        ResourceLocation id = potionId(stack);
+        if (id == null) return 0;
+
+        String path = id.getPath();
+        int price = potionBasePrice(path);
+        if (path.startsWith("long_")) price += 500;
+        if (path.startsWith("strong_")) price += 1_000;
+        if (stack.is(Items.SPLASH_POTION)) price += 500;
+        if (stack.is(Items.LINGERING_POTION)) price += 10_000;
+        return Math.min(MAX_ENCHANTMENT_PRICE, price);
+    }
+
+    public static int potionSellPrice(ItemStack stack) {
+        int buyPrice = potionBuyPrice(stack);
+        return buyPrice > 0 ? Math.max(1, buyPrice / 5) : 0;
+    }
+
+    private static boolean isEffectPotion(Potion potion) {
+        return potion != null && !potion.getEffects().isEmpty();
+    }
+
+    private static int potionBasePrice(String path) {
+        String base = path;
+        if (base.startsWith("long_")) base = base.substring("long_".length());
+        if (base.startsWith("strong_")) base = base.substring("strong_".length());
+        return switch (base) {
+            case "night_vision" -> 3_500;
+            case "invisibility" -> 4_500;
+            case "leaping" -> 3_000;
+            case "fire_resistance" -> 4_500;
+            case "swiftness" -> 3_000;
+            case "slowness" -> 3_000;
+            case "water_breathing" -> 3_500;
+            case "healing", "harming" -> 4_000;
+            case "poison" -> 3_000;
+            case "regeneration" -> 6_000;
+            case "strength" -> 5_500;
+            case "weakness" -> 1_500;
+            case "turtle_master" -> 8_500;
+            case "slow_falling" -> 5_000;
+            default -> 3_000;
+        };
+    }
+
     public static boolean isValidPurchase(ItemStack stack) {
         if (stack.isEmpty() || !isTradable(stack.getItem())) return false;
+        if (isPotionItem(stack.getItem())) return potionId(stack) != null;
         return !stack.is(Items.ENCHANTED_BOOK) || singleBookEnchantment(stack) != null;
     }
 
@@ -448,10 +520,18 @@ public final class PriceManager {
         return List.copyOf(result);
     }
 
-    /** One entry per ordinary item plus every valid level of every vanilla enchantment. */
+    /** One entry per ordinary item plus valid potion and enchanted-book variants. */
     public static List<ItemStack> allShopEntries() {
         List<ItemStack> result = new ArrayList<>();
         for (Item item : allVanillaItems()) {
+            if (isPotionItem(item)) {
+                for (Potion potion : effectPotions()) {
+                    ItemStack stack = item.getDefaultInstance();
+                    PotionUtils.setPotion(stack, potion);
+                    result.add(stack);
+                }
+                continue;
+            }
             if (item != Items.ENCHANTED_BOOK) {
                 result.add(item.getDefaultInstance());
                 continue;
@@ -469,5 +549,14 @@ public final class PriceManager {
             }
         }
         return List.copyOf(result);
+    }
+
+    private static List<Potion> effectPotions() {
+        List<Potion> result = new ArrayList<>();
+        BuiltInRegistries.POTION.forEach(potion -> {
+            if (isEffectPotion(potion)) result.add(potion);
+        });
+        result.sort(Comparator.comparing(potion -> BuiltInRegistries.POTION.getKey(potion).toString()));
+        return result;
     }
 }

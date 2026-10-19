@@ -22,7 +22,7 @@ public final class ShopMenu extends AbstractContainerMenu {
     public static final int SALE_SLOT = 1;
 
     private final SimpleContainer shopSlots = new SimpleContainer(2);
-    private final ContainerData state = new SimpleContainerData(2); // tab, purchase paid
+    private final ContainerData state = new SimpleContainerData(1); // tab
 
     public ShopMenu(int containerId, Inventory inventory, FriendlyByteBuf ignored) {
         this(containerId, inventory);
@@ -50,10 +50,6 @@ public final class ShopMenu extends AbstractContainerMenu {
         return state.get(0);
     }
 
-    public boolean purchasePaid() {
-        return state.get(1) == 1;
-    }
-
     public void setTab(int tab) {
         state.set(0, tab == TAB_SELL ? TAB_SELL : TAB_BUY);
         broadcastChanges();
@@ -66,9 +62,6 @@ public final class ShopMenu extends AbstractContainerMenu {
     public void selectPurchase(ItemStack product, int quantity) {
         if (tab() != TAB_BUY || !PriceManager.isValidPurchase(product)
                 || quantity < 1 || quantity > PriceManager.maxPurchaseQuantity(product)) return;
-        ItemStack current = shopSlots.getItem(PURCHASE_SLOT);
-        if (purchasePaid() && !current.isEmpty()) return;
-        state.set(1, 0);
         ItemStack preview = product.copy();
         preview.setCount(quantity);
         shopSlots.setItem(PURCHASE_SLOT, preview);
@@ -76,11 +69,11 @@ public final class ShopMenu extends AbstractContainerMenu {
     }
 
     public void buy(ServerPlayer player) {
-        if (tab() != TAB_BUY || purchasePaid()) return;
+        if (tab() != TAB_BUY) return;
         ItemStack preview = shopSlots.getItem(PURCHASE_SLOT);
         if (preview.isEmpty()) return;
         if (ShopService.chargePurchase(player, preview)) {
-            state.set(1, 1);
+            giveToPlayer(player, preview.copy());
             broadcastChanges();
         }
     }
@@ -103,7 +96,7 @@ public final class ShopMenu extends AbstractContainerMenu {
         ItemStack result = original.copy();
 
         if (index == PURCHASE_SLOT) {
-            if (!purchasePaid() || !moveItemStackTo(original, 2, 38, true)) return ItemStack.EMPTY;
+            return ItemStack.EMPTY;
         } else if (index == SALE_SLOT) {
             if (!moveItemStackTo(original, 2, 38, true)) return ItemStack.EMPTY;
         } else {
@@ -121,13 +114,12 @@ public final class ShopMenu extends AbstractContainerMenu {
         super.removed(player);
         if (player.level().isClientSide) return;
 
-        ItemStack purchase = shopSlots.removeItemNoUpdate(PURCHASE_SLOT);
-        if (purchasePaid() && !purchase.isEmpty()) returnToPlayer(player, purchase);
+        shopSlots.removeItemNoUpdate(PURCHASE_SLOT);
         ItemStack sale = shopSlots.removeItemNoUpdate(SALE_SLOT);
-        if (!sale.isEmpty()) returnToPlayer(player, sale);
+        if (!sale.isEmpty()) giveToPlayer(player, sale);
     }
 
-    private static void returnToPlayer(Player player, ItemStack stack) {
+    private static void giveToPlayer(Player player, ItemStack stack) {
         if (!player.getInventory().add(stack) && !stack.isEmpty()) player.drop(stack, false);
     }
 
@@ -148,7 +140,7 @@ public final class ShopMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPickup(Player player) {
-            return isActive() && purchasePaid();
+            return false;
         }
 
         @Override
@@ -156,11 +148,6 @@ public final class ShopMenu extends AbstractContainerMenu {
             return tab() == TAB_BUY;
         }
 
-        @Override
-        public void onTake(Player player, ItemStack stack) {
-            super.onTake(player, stack);
-            if (!hasItem()) state.set(1, 0);
-        }
     }
 
     private final class SaleSlot extends Slot {

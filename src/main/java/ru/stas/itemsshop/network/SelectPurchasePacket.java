@@ -14,7 +14,8 @@ import ru.stas.itemsshop.economy.PriceManager;
 import java.util.function.Supplier;
 
 public record SelectPurchasePacket(int containerId, ResourceLocation itemId,
-                                   ResourceLocation enchantmentId, int enchantmentLevel, int quantity) {
+                                   ResourceLocation enchantmentId, int enchantmentLevel,
+                                   ResourceLocation potionId, int quantity) {
     public static void encode(SelectPurchasePacket packet, FriendlyByteBuf buffer) {
         buffer.writeVarInt(packet.containerId);
         buffer.writeResourceLocation(packet.itemId);
@@ -23,6 +24,8 @@ public record SelectPurchasePacket(int containerId, ResourceLocation itemId,
             buffer.writeResourceLocation(packet.enchantmentId);
             buffer.writeVarInt(packet.enchantmentLevel);
         }
+        buffer.writeBoolean(packet.potionId != null);
+        if (packet.potionId != null) buffer.writeResourceLocation(packet.potionId);
         buffer.writeVarInt(packet.quantity);
     }
 
@@ -35,7 +38,8 @@ public record SelectPurchasePacket(int containerId, ResourceLocation itemId,
             enchantmentId = buffer.readResourceLocation();
             enchantmentLevel = buffer.readVarInt();
         }
-        return new SelectPurchasePacket(containerId, itemId, enchantmentId, enchantmentLevel, buffer.readVarInt());
+        ResourceLocation potionId = buffer.readBoolean() ? buffer.readResourceLocation() : null;
+        return new SelectPurchasePacket(containerId, itemId, enchantmentId, enchantmentLevel, potionId, buffer.readVarInt());
     }
 
     public static void handle(SelectPurchasePacket packet, Supplier<NetworkEvent.Context> contextSupplier) {
@@ -45,14 +49,20 @@ public record SelectPurchasePacket(int containerId, ResourceLocation itemId,
             Item item = BuiltInRegistries.ITEM.getOptional(packet.itemId).orElse(Items.AIR);
             if (item != Items.AIR) {
                 ItemStack product;
-                if (packet.enchantmentId != null) {
+                if (packet.potionId != null) {
+                    if (!PriceManager.isPotionItem(item)) {
+                        contextSupplier.get().setPacketHandled(true);
+                        return;
+                    }
+                    product = PriceManager.potionStack(item, packet.potionId);
+                } else if (packet.enchantmentId != null) {
                     if (item != Items.ENCHANTED_BOOK) {
                         contextSupplier.get().setPacketHandled(true);
                         return;
                     }
                     product = PriceManager.enchantedBook(packet.enchantmentId, packet.enchantmentLevel);
                 } else {
-                    if (item == Items.ENCHANTED_BOOK) {
+                    if (item == Items.ENCHANTED_BOOK || PriceManager.isPotionItem(item)) {
                         contextSupplier.get().setPacketHandled(true);
                         return;
                     }

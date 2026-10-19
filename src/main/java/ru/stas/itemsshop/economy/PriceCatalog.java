@@ -46,6 +46,8 @@ public final class PriceCatalog {
     }
 
     public int buyPrice(ItemStack stack) {
+        int potionPrice = PriceManager.potionBuyPrice(stack);
+        if (potionPrice > 0) return potionPrice;
         int enchantedBookPrice = PriceManager.enchantedBookBuyPrice(stack);
         return enchantedBookPrice > 0 ? enchantedBookPrice : buyPrice(stack.getItem());
     }
@@ -55,6 +57,8 @@ public final class PriceCatalog {
     }
 
     public int sellPrice(ItemStack stack) {
+        int potionPrice = PriceManager.potionSellPrice(stack);
+        if (potionPrice > 0) return potionPrice;
         int enchantedBookPrice = PriceManager.enchantedBookSellPrice(stack);
         if (enchantedBookPrice > 0) return enchantedBookPrice;
         long price = Math.min(MAX_PRICE,
