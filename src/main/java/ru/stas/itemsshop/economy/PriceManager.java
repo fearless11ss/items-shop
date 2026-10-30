@@ -57,6 +57,7 @@ public final class PriceManager {
         price(Items.COBBLESTONE, 5, 2);          price(Items.STONE, 6, 2);
         price(Items.COBBLED_DEEPSLATE, 7, 2);    price(Items.DEEPSLATE, 8, 2);
         price(Items.NETHERRACK, 3, 1);           price(Items.END_STONE, 8, 2);
+        price(Items.MAGMA_BLOCK, 100, 2);
         price(Items.GLASS, 8, 3);                price(Items.GLASS_PANE, 3, 1);
         price(Items.CLAY_BALL, 4, 1);            price(Items.CLAY, 16, 4);
         price(Items.SNOWBALL, 2, 1);             price(Items.SNOW_BLOCK, 8, 4);
@@ -108,6 +109,7 @@ public final class PriceManager {
 
         // Reversible mob drops and compact forms.
         price(Items.SLIME_BALL, 20, 4);          price(Items.SLIME_BLOCK, 180, 36);
+        price(Items.MAGMA_CREAM, 3_500, 50);
         price(Items.BONE_MEAL, 4, 1);            price(Items.BONE, 12, 3);
         price(Items.BONE_BLOCK, 36, 9);          price(Items.GLOWSTONE_DUST, 20, 4);
         price(Items.GLOWSTONE, 80, 16);          price(Items.STRING, 12, 3);
