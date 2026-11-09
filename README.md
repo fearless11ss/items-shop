@@ -61,24 +61,6 @@ The compiled mod is written to the selected implementation's `build/libs` direct
 
 Please use GitHub Issues and include the Minecraft, mod loader, and Items Shop versions, clear reproduction steps, the expected result, and relevant logs or crash reports. Remove access tokens, server addresses, and other private information before attaching logs.
 
-## AI assistance disclosure
-
-Generative AI assistance was used for parts of the implementation and code review, as well as for drafting documentation and localization text. The project concept, feature decisions, economy design, testing, icon, and gallery images were created or directed by the author.
-
 ## License
 
 Items Shop is available under the [MIT License](LICENSE.txt).
-
----
-
-## Русский
-
-Items Shop — мод для Minecraft, добавляющий внутриигровой магазин почти всех ванильных предметов и блоков.
-
-- Магазин открывается клавишей `B`, которую можно переназначить.
-- Стартовый баланс каждого игрока — 0 монет.
-- Доступны поиск, категории, покупка, продажа и все уровни ванильных зачарованных книг.
-- Цены, балансы и транзакции проверяются сервером.
-- Ограничений на обычную добычу и автоматические фермы нет.
-
-Для игры мод нужно установить на клиент и сервер. Дополнительные моды не требуются.
