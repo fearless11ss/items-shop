@@ -25,5 +25,8 @@ crash-reports
 *.log
 .vscode
 
+# obsidian
+.obsidian
+
 # Files from Forge MDK
 forge*changelog.txt

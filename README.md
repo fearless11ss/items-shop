@@ -46,6 +46,8 @@ No additional mods are required. For single-player, install the mod in the local
 
 Each supported implementation lives in its own `<modloader>-<minecraft-version>` directory.
 
+See [REPOSITORY_MAP.md](REPOSITORY_MAP.md) for the complete file index, architecture, invariants, and maintenance notes.
+
 ## Building from source
 
 The current implementation requires JDK 17-21.
