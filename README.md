@@ -40,15 +40,22 @@ No additional mods are required. For single-player, install the mod in the local
 - The dragon egg cannot be bought or sold because vanilla portal duplication would allow unlimited copies to generate money.
 - Selling an item removes the entire offered stack together with its custom name, enchantments, stored contents, and other NBT data. Empty containers before selling them if you want to keep their contents.
 
+## Repository layout
+
+- `forge-1.20.1/` — Forge implementation for Minecraft 1.20.1.
+
+Each supported implementation lives in its own `<modloader>-<minecraft-version>` directory.
+
 ## Building from source
 
-JDK 17-21 is required.
+The current implementation requires JDK 17-21.
 
 ```powershell
-./gradlew.bat --gradle-user-home C:\GradleItemsShop build
+cd forge-1.20.1
+.\gradlew.bat --gradle-user-home C:\GradleItemsShop build
 ```
 
-The compiled mod is written to the `build/libs` directory.
+The compiled mod is written to the selected implementation's `build/libs` directory.
 
 ## Reporting bugs
 

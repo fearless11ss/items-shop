@@ -18,10 +18,18 @@ body:
       required: true
 
   - type: input
-    id: forge-version
+    id: minecraft-version
     attributes:
-      label: Forge version
-      placeholder: "47.4.10"
+      label: Minecraft version
+      placeholder: "1.20.1"
+    validations:
+      required: true
+
+  - type: input
+    id: mod-loader-version
+    attributes:
+      label: Mod loader and version
+      placeholder: "Loader name and version"
     validations:
       required: true
 
@@ -82,7 +90,7 @@ body:
     attributes:
       label: Checklist
       options:
-        - label: I am using Minecraft 1.20.1 with Forge.
+        - label: I am using a supported Minecraft version and mod loader for the downloaded file.
           required: true
         - label: I searched existing issues for this problem.
           required: true

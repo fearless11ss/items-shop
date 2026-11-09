@@ -2,7 +2,7 @@
 
 ## Bug reports
 
-Use the bug report form in GitHub Issues. Include exact reproduction steps and the versions of Items Shop, Minecraft, and Forge. Attach `latest.log` or a crash report when relevant, but remove access tokens, server addresses, and other private information first.
+Use the bug report form in GitHub Issues. Include exact reproduction steps and the versions of Items Shop, Minecraft, and the mod loader. Attach `latest.log` or a crash report when relevant, but remove access tokens, server addresses, and other private information first.
 
 ## Pull requests
 
