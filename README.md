@@ -1,6 +1,6 @@
 # Items Shop
 
-Items Shop is a Forge 1.20.1 mod that adds a secure in-game marketplace for buying and selling almost every vanilla item. Players earn coins by selling gathered, crafted, farmed, or looted items and can spend them without leaving the world.
+Items Shop is a Minecraft mod that adds a secure in-game marketplace for buying and selling almost every vanilla item. Players earn coins by selling gathered, crafted, farmed, or looted items and can spend them without leaving the world.
 
 The economy is designed to reduce repetitive grinding without replacing normal survival progression.
 
@@ -20,16 +20,16 @@ The economy is designed to reduce repetitive grinding without replacing normal s
 
 ## Requirements
 
-- Minecraft 1.20.1
-- Forge 47 or newer for Minecraft 1.20.1
+- A supported Minecraft version
+- The mod loader listed for the downloaded file
 - Installation on both the client and the server
 
 No additional mods are required. For single-player, install the mod in the local Minecraft instance as usual.
 
 ## Installation
 
-1. Install Forge for Minecraft 1.20.1.
-2. Download the latest Items Shop `.jar`.
+1. Install the mod loader required by the Items Shop file for your Minecraft version.
+2. Download the matching Items Shop `.jar`.
 3. Place it in the `mods` folder on every client and on the server.
 4. Start Minecraft and press `B` to open the shop.
 
@@ -48,11 +48,11 @@ JDK 17-21 is required.
 ./gradlew.bat --gradle-user-home C:\GradleItemsShop build
 ```
 
-The compiled mod is written to `build/libs/items_shop-1.6.13.jar`.
+The compiled mod is written to the `build/libs` directory.
 
 ## Reporting bugs
 
-Please use GitHub Issues and include the Minecraft, Forge, and Items Shop versions, clear reproduction steps, the expected result, and relevant logs or crash reports. Remove access tokens, server addresses, and other private information before attaching logs.
+Please use GitHub Issues and include the Minecraft, mod loader, and Items Shop versions, clear reproduction steps, the expected result, and relevant logs or crash reports. Remove access tokens, server addresses, and other private information before attaching logs.
 
 ## AI assistance disclosure
 
@@ -66,7 +66,7 @@ Items Shop is available under the [MIT License](LICENSE.txt).
 
 ## Русский
 
-Items Shop — мод для Forge 1.20.1, добавляющий внутриигровой магазин почти всех ванильных предметов и блоков Minecraft 1.20.1.
+Items Shop — мод для Minecraft, добавляющий внутриигровой магазин почти всех ванильных предметов и блоков.
 
 - Магазин открывается клавишей `B`, которую можно переназначить.
 - Стартовый баланс каждого игрока — 0 монет.
