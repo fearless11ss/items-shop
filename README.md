@@ -60,7 +60,7 @@ Generative AI assistance was used for parts of the implementation and code revie
 
 ## License
 
-Items Shop is available under the [MIT License](LICENSE.md).
+Items Shop is available under the [MIT License](LICENSE.txt).
 
 ---
 
