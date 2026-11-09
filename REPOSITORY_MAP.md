@@ -11,7 +11,7 @@ status: active
 updated: 2026-11-09
 current-version: 1.6.13
 current-implementation: forge-1.20.1
-related: "[[README]]"
+related: README.md
 ---
 
 # Items Shop — карта репозитория
@@ -25,7 +25,6 @@ related: "[[README]]"
 |---|---|
 | Проект | Items Shop |
 | Mod ID | `items_shop` |
-| Java package | `ru.stas.itemsshop` |
 | Текущая версия мода | `1.6.13` |
 | Текущая реализация | `forge-1.20.1` |
 | Minecraft | `1.20.1` |
@@ -48,17 +47,17 @@ Items Shop добавляет сервер-авторитетный магази
 
 ## Навигация
 
-- [[#Архитектура]]
-- [[#Полный индекс файлов]]
-- [[#Основные потоки выполнения]]
-- [[#Сетевая модель]]
-- [[#Экономика]]
-- [[#Клиентский интерфейс]]
-- [[#Совместимость]]
-- [[#Сборка и проверка]]
-- [[#Инварианты и риски]]
-- [[#История важных решений]]
-- [[#Чек-лист изменения мода]]
+- [Архитектура](#архитектура)
+- [Полный индекс файлов](#полный-индекс-файлов)
+- [Основные потоки выполнения](#основные-потоки-выполнения)
+- [Сетевая модель](#сетевая-модель)
+- [Экономика](#экономика)
+- [Клиентский интерфейс](#клиентский-интерфейс)
+- [Совместимость](#совместимость)
+- [Сборка и проверка](#сборка-и-проверка)
+- [Инварианты и риски](#инварианты-и-риски)
+- [История важных решений](#история-важных-решений)
+- [Чек-лист изменения мода](#чек-лист-изменения-мода)
 
 ## Архитектура
 
@@ -96,83 +95,83 @@ flowchart LR
 
 | Файл | Назначение |
 |---|---|
-| [[.gitattributes]] | Правила окончаний строк для генерируемых ресурсов во всех реализациях |
-| [[.gitignore]] | Исключает IDE, Gradle, build, run, логи и crash reports |
-| [[.github/ISSUE_TEMPLATE/bug_report.yml|bug_report.yml]] | Универсальная форма баг-репорта: версия мода, Minecraft, загрузчик, окружение, шаги и логи |
-| [[.github/ISSUE_TEMPLATE/config.yml|config.yml]] | Конфигурация GitHub Issue Templates |
-| [[CONTRIBUTING]] | Правила баг-репортов, PR и экономических изменений |
-| [[LICENSE.txt]] | MIT License, copyright `fearless11ss` |
-| [[README]] | Публичное описание, установка, структура репозитория и сборка |
-| [[REPOSITORY_MAP]] | Текущая Obsidian-карта и постоянный рабочий контекст |
+| [.gitattributes](.gitattributes) | Правила окончаний строк для генерируемых ресурсов во всех реализациях |
+| [.gitignore](.gitignore) | Исключает IDE, Gradle, build, run, логи и crash reports |
+| [bug_report.yml](.github/ISSUE_TEMPLATE/bug_report.yml) | Универсальная форма баг-репорта: версия мода, Minecraft, загрузчик, окружение, шаги и логи |
+| [config.yml](.github/ISSUE_TEMPLATE/config.yml) | Конфигурация GitHub Issue Templates |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Правила баг-репортов, PR и экономических изменений |
+| [LICENSE.txt](LICENSE.txt) | MIT License |
+| [README.md](README.md) | Публичное описание, установка, структура репозитория и сборка |
+| [REPOSITORY_MAP.md](REPOSITORY_MAP.md) | Текущая Obsidian-карта и постоянный рабочий контекст |
 
 ### Реализация `forge-1.20.1`: сборка
 
 | Файл | Назначение |
 |---|---|
-| [[forge-1.20.1/build.gradle|build.gradle]] | ForgeGradle, run-конфигурации, зависимости JEI/IPN, ресурсы, JAR и reobf |
-| [[forge-1.20.1/gradle.properties|gradle.properties]] | Версии Minecraft/Forge/мода, mappings и metadata |
-| [[forge-1.20.1/settings.gradle|settings.gradle]] | Репозитории Gradle plugins и Foojay toolchain resolver |
-| [[forge-1.20.1/gradlew|gradlew]] | Gradle wrapper для Unix |
-| [[forge-1.20.1/gradlew.bat|gradlew.bat]] | Gradle wrapper для Windows |
-| [[forge-1.20.1/gradle/wrapper/gradle-wrapper.properties|gradle-wrapper.properties]] | Gradle `8.8` и параметры загрузки wrapper |
-| [[forge-1.20.1/gradle/wrapper/gradle-wrapper.jar|gradle-wrapper.jar]] | Бинарный launcher Gradle wrapper |
+| [build.gradle](forge-1.20.1/build.gradle) | ForgeGradle, run-конфигурации, зависимости JEI/IPN, ресурсы, JAR и reobf |
+| [gradle.properties](forge-1.20.1/gradle.properties) | Версии Minecraft/Forge/мода, mappings и metadata |
+| [settings.gradle](forge-1.20.1/settings.gradle) | Репозитории Gradle plugins и Foojay toolchain resolver |
+| [gradlew](forge-1.20.1/gradlew) | Gradle wrapper для Unix |
+| [gradlew.bat](forge-1.20.1/gradlew.bat) | Gradle wrapper для Windows |
+| [gradle-wrapper.properties](forge-1.20.1/gradle/wrapper/gradle-wrapper.properties) | Gradle `8.8` и параметры загрузки wrapper |
+| [gradle-wrapper.jar](forge-1.20.1/gradle/wrapper/gradle-wrapper.jar) | Бинарный launcher Gradle wrapper |
 
 ### Bootstrap
 
 | Файл | Назначение |
 |---|---|
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/ItemsShop.java|ItemsShop.java]] | `@Mod`, `MOD_ID`, регистрация `SHOP_MENU`, запуск `ShopNetwork.register()` |
+| [ItemsShop.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/ItemsShop.java) | `@Mod`, `MOD_ID`, регистрация `SHOP_MENU`, запуск `ShopNetwork.register()` |
 
 ### Client
 
 | Файл | Назначение |
 |---|---|
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ClientEvents.java|ClientEvents.java]] | Клавиша `B`, регистрация экрана, tooltip спавнера, IPN-совместимость через reflection |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ClientPacketHandler.java|ClientPacketHandler.java]] | Принимает `BalanceSyncPacket`, обновляет состояние и показывает сообщение |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ClientState.java|ClientState.java]] | Клиентская копия текущего баланса, всегда неотрицательная |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ShopScreen.java|ShopScreen.java]] | Полный UI магазина: вкладки, поиск, категории, сетка, количество, цены и уведомления |
+| [ClientEvents.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ClientEvents.java) | Клавиша `B`, регистрация экрана, tooltip спавнера, IPN-совместимость через reflection |
+| [ClientPacketHandler.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ClientPacketHandler.java) | Принимает `BalanceSyncPacket`, обновляет состояние и показывает сообщение |
+| [ClientState.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ClientState.java) | Клиентская копия текущего баланса, всегда неотрицательная |
+| [ShopScreen.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/client/ShopScreen.java) | Полный UI магазина: вкладки, поиск, категории, сетка, количество, цены и уведомления |
 
 ### Economy
 
 | Файл | Назначение |
 |---|---|
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/BalanceData.java|BalanceData.java]] | `SavedData` с балансами по UUID в данных Overworld |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/PriceCatalog.java|PriceCatalog.java]] | Рекурсивный расчёт цен по рецептам и кэш на `RecipeManager` |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/PriceManager.java|PriceManager.java]] | Ручные цены, fallback, ограничения, книги, зелья и каталог торговых позиций |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/ShopService.java|ShopService.java]] | Серверные покупка/продажа, списание/начисление и синхронизация клиента |
+| [BalanceData.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/BalanceData.java) | `SavedData` с балансами по UUID в данных Overworld |
+| [PriceCatalog.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/PriceCatalog.java) | Рекурсивный расчёт цен по рецептам и кэш на `RecipeManager` |
+| [PriceManager.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/PriceManager.java) | Ручные цены, fallback, ограничения, книги, зелья и каталог торговых позиций |
+| [ShopService.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/economy/ShopService.java) | Серверные покупка/продажа, списание/начисление и синхронизация клиента |
 
 ### Menu
 
 | Файл | Назначение |
 |---|---|
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/menu/ShopMenu.java|ShopMenu.java]] | Два служебных слота, инвентарь игрока, вкладки, покупка, продажа и shift-click |
+| [ShopMenu.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/menu/ShopMenu.java) | Два служебных слота, инвентарь игрока, вкладки, покупка, продажа и shift-click |
 
 ### Network
 
 | Файл | Направление | Назначение |
 |---|---|---|
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/network/ShopNetwork.java|ShopNetwork.java]] | Оба | Канал `items_shop:main`, protocol `4`, регистрация и отправка пакетов |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/network/OpenShopPacket.java|OpenShopPacket.java]] | C → S | Открывает серверный `ShopMenu` и синхронизирует баланс |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/network/RequestBalancePacket.java|RequestBalancePacket.java]] | C → S | Запрашивает актуальный баланс |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/network/SelectPurchasePacket.java|SelectPurchasePacket.java]] | C → S | Передаёт item ID, книгу/зелье и количество; сервер реконструирует предмет |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/network/MenuActionPacket.java|MenuActionPacket.java]] | C → S | Подтверждает покупку или продажу |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/network/SetShopTabPacket.java|SetShopTabPacket.java]] | C → S | Синхронизирует Buy/Sell вкладку |
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/network/BalanceSyncPacket.java|BalanceSyncPacket.java]] | S → C | Передаёт баланс, сообщение операции и success-флаг |
+| [ShopNetwork.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/network/ShopNetwork.java) | Оба | Канал `items_shop:main`, protocol `4`, регистрация и отправка пакетов |
+| [OpenShopPacket.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/network/OpenShopPacket.java) | C → S | Открывает серверный `ShopMenu` и синхронизирует баланс |
+| [RequestBalancePacket.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/network/RequestBalancePacket.java) | C → S | Запрашивает актуальный баланс |
+| [SelectPurchasePacket.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/network/SelectPurchasePacket.java) | C → S | Передаёт item ID, книгу/зелье и количество; сервер реконструирует предмет |
+| [MenuActionPacket.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/network/MenuActionPacket.java) | C → S | Подтверждает покупку или продажу |
+| [SetShopTabPacket.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/network/SetShopTabPacket.java) | C → S | Синхронизирует Buy/Sell вкладку |
+| [BalanceSyncPacket.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/network/BalanceSyncPacket.java) | S → C | Передаёт баланс, сообщение операции и success-флаг |
 
 ### Compatibility
 
 | Файл | Назначение |
 |---|---|
-| [[forge-1.20.1/src/main/java/ru/stas/itemsshop/compat/jei/ItemsShopJeiPlugin.java|ItemsShopJeiPlugin.java]] | Регистрирует весь `ShopScreen` как GUI-область, скрывая JEI overlay |
+| [ItemsShopJeiPlugin.java](forge-1.20.1/src/main/java/ru/stas/itemsshop/compat/jei/ItemsShopJeiPlugin.java) | Регистрирует весь `ShopScreen` как GUI-область, скрывая JEI overlay |
 
 ### Resources
 
 | Файл | Назначение |
 |---|---|
-| [[forge-1.20.1/src/main/resources/META-INF/mods.toml|mods.toml]] | Forge metadata и обязательные зависимости Minecraft/Forge |
-| [[forge-1.20.1/src/main/resources/assets/items_shop/lang/en_us.json|en_us.json]] | Английская локализация UI, сообщений и tooltip |
-| [[forge-1.20.1/src/main/resources/assets/items_shop/lang/ru_ru.json|ru_ru.json]] | Русская локализация UI, сообщений и tooltip |
-| [[forge-1.20.1/src/main/resources/pack.mcmeta|pack.mcmeta]] | Metadata встроенного resource pack |
+| [mods.toml](forge-1.20.1/src/main/resources/META-INF/mods.toml) | Forge metadata и обязательные зависимости Minecraft/Forge |
+| [en_us.json](forge-1.20.1/src/main/resources/assets/items_shop/lang/en_us.json) | Английская локализация UI, сообщений и tooltip |
+| [ru_ru.json](forge-1.20.1/src/main/resources/assets/items_shop/lang/ru_ru.json) | Русская локализация UI, сообщений и tooltip |
+| [pack.mcmeta](forge-1.20.1/src/main/resources/pack.mcmeta) | Metadata встроенного resource pack |
 
 ### Генерируемые и игнорируемые каталоги
 
