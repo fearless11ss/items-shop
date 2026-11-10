@@ -11,7 +11,9 @@ status: active
 updated: 2026-11-10
 current-version: 1.6.14
 current-implementation: forge-1.20.1
-related: README.md
+related:
+  - README.md
+  - CHANGELOG.md
 ---
 
 # Items Shop — карта репозитория
@@ -99,6 +101,7 @@ flowchart LR
 | [.gitignore](.gitignore) | Исключает IDE, Gradle, build, run, логи и crash reports |
 | [bug_report.yml](.github/ISSUE_TEMPLATE/bug_report.yml) | Универсальная форма баг-репорта: версия мода, Minecraft, загрузчик, окружение, шаги и логи |
 | [config.yml](.github/ISSUE_TEMPLATE/config.yml) | Конфигурация GitHub Issue Templates |
+| [CHANGELOG.md](CHANGELOG.md) | История опубликованных версий и изменений мода |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Правила баг-репортов, PR и экономических изменений |
 | [LICENSE.txt](LICENSE.txt) | MIT License |
 | [README.md](README.md) | Публичное описание, установка, структура репозитория и сборка |

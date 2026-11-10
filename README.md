@@ -48,6 +48,8 @@ Each supported implementation lives in its own `<modloader>-<minecraft-version>`
 
 See [REPOSITORY_MAP.md](REPOSITORY_MAP.md) for the complete file index, architecture, invariants, and maintenance notes.
 
+See [CHANGELOG.md](CHANGELOG.md) for the complete history of published releases.
+
 ## Building from source
 
 The current implementation requires JDK 17-21.
