@@ -145,6 +145,9 @@ public final class PriceManager {
         price(Items.BUCKET, 300, 60);             price(Items.WATER_BUCKET, 320, 60);
         price(Items.MILK_BUCKET, 340, 60);        price(Items.LAVA_BUCKET, 800, 150);
         price(Items.POWDER_SNOW_BUCKET, 400, 60);
+        price(Items.COD_BUCKET, 400, 60);          price(Items.SALMON_BUCKET, 400, 60);
+        price(Items.TROPICAL_FISH_BUCKET, 500, 70); price(Items.PUFFERFISH_BUCKET, 800, 80);
+        price(Items.TADPOLE_BUCKET, 2_000, 100);   price(Items.AXOLOTL_BUCKET, 5_000, 200);
         price(Items.EGG, 4, 1);
 
         // Spawners are sold empty. NBT does not change their resale value.

@@ -8,8 +8,8 @@ tags:
   - repository-map
   - minecraft/mod
 status: active
-updated: 2026-11-09
-current-version: 1.6.13
+updated: 2026-11-10
+current-version: 1.6.14
 current-implementation: forge-1.20.1
 related: README.md
 ---
@@ -25,7 +25,7 @@ related: README.md
 |---|---|
 | Проект | Items Shop |
 | Mod ID | `items_shop` |
-| Текущая версия мода | `1.6.13` |
+| Текущая версия мода | `1.6.14` |
 | Текущая реализация | `forge-1.20.1` |
 | Minecraft | `1.20.1` |
 | Forge | `47.4.10` |
@@ -257,6 +257,12 @@ flowchart LR
 |---|---:|---:|---|
 | Magma Block | 100 | 2 | Массово встречается в Basalt Deltas; рецепт из Magma Cream завышал продажу до 1216 |
 | Magma Cream | 3 500 | 50 | Фармится с Magma Cubes, но высокая buy price защищает экономику зелий |
+| Cod Bucket | 400 | 60 | Учитывает возвращаемое пустое ведро и закрывает fallback `20/4` |
+| Salmon Bucket | 400 | 60 | Учитывает возвращаемое пустое ведро и закрывает fallback `20/4` |
+| Tropical Fish Bucket | 500 | 70 | Более редкий декоративный моб |
+| Pufferfish Bucket | 800 | 80 | Полезный brewing-ингредиент и опасный моб |
+| Tadpole Bucket | 2 000 | 100 | Даёт доступ к выращиванию лягушек |
+| Axolotl Bucket | 5 000 | 200 | Редкий и полезный водный моб |
 | Spawner | 10 000 000 | 2 000 000 | Покупается пустым, максимум по одному |
 | Dragon Egg | — | — | Полностью исключён из-за vanilla portal duplication |
 
@@ -359,6 +365,7 @@ $env:Path = "$env:JAVA_HOME\bin;$env:Path"
 | 1.6.9 | Исправлена совместимость IPN/JEI |
 | 1.6.12 | Добавлены варианты зелий и автоматическая доставка покупки |
 | 1.6.13 | Magma Block `100/2`, Magma Cream `3500/50` |
+| 1.6.14 | Добавлены ручные цены для шести вёдер с мобами; закрыт цикл `купить за 20 → выпустить моба → продать ведро за 60` |
 | 2026-11-09 | Репозиторий переведён на каталоги `<modloader>-<minecraft-version>` |
 
 ## Где менять конкретную функциональность
